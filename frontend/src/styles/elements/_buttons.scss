@@ -1,0 +1,57 @@
+/* ---------------------
+---- Default button  ---
+----------------------- */
+@mixin button-size-y($height) {
+    height: $height;
+    line-height: $height;
+}
+
+@mixin button-apperance($bgcolor, $color) {
+    background-color: $bgcolor;
+    color: $color;
+
+    &:hover {
+        background-color: $bgcolor;
+        opacity: .8;
+    }
+}
+
+button,
+.button {
+    @include button-size-y(48px);
+    @include button-apperance($bgcolor: yellow, $color: black);
+
+    font-size: 16px;
+    font-family: 'Neue Machina';
+    color: #000;
+    padding: 0 34px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    transition: background-color .09s ease-in;
+
+    // Внешний вид
+    &--black {
+        @include button-apperance($bgcolor: black, $color: white);
+    }
+
+    &--white {
+        @include button-apperance($bgcolor: white, $color: black);
+    }
+
+    // Размер
+    &--height-md {
+        @include button-size-y(56px);
+    }
+
+    &--height-lg {
+        @include button-size-y(60px);
+    }
+
+    &--full-width {
+        width: 100%;
+    }
+}
