@@ -1,0 +1,42 @@
+// Палитра цветов по оттенкам
+$white-color: #FFFFFF;
+
+$lilac-color-50: #F9F9FF;
+$lilac-color-100: #ECECFF;
+$lilac-color-200: #DFDFFF;
+$lilac-color-300: #DCDCFF;
+$lilac-color-400: #C6C6FF;
+$lilac-color-800: #1B1BE8;
+$lilac-color-900: #2D0A54;
+
+$gray-color-100: #D9D9D9;
+$gray-color-600: #9B9B9B;
+$gray-color-700: #5A5A5A;
+
+/* Цветовая схема светлой темы */
+@mixin light-theme-css-vars {
+    --background-color-0: #{$white-color};
+    --background-color-100: #{$lilac-color-100};
+    --background-color-200: #{$lilac-color-200};
+    --background-color-300: #{$lilac-color-300};
+    --background-color-400: #{$lilac-color-400};
+    --background-color-800: #{$lilac-color-800};
+
+    --text-color-heavy: #{$lilac-color-900};
+    --text-color-regular: #{$gray-color-700};
+    --text-color-light: #{$gray-color-600};
+    --text-color-accent: #{$lilac-color-800};
+    --text-color-link: #{$lilac-color-800};
+    --text-color-on-heavy-bg: #{$white-color};
+
+    --ui-color-accent: #{$lilac-color-800};
+    --ui-color-secondary: #{$lilac-color-300};
+
+    --color-error: #EE8F00;
+    --color-warning: #F62626;
+    --color-success: #0BB526;
+}
+
+:root {
+    @include light-theme-css-vars();
+}
