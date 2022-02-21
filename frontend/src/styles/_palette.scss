@@ -16,6 +16,7 @@ $gray-color-700: #5A5A5A;
 /* Цветовая схема светлой темы */
 @mixin light-theme-css-vars {
     --background-color-0: #{$white-color};
+    --background-color-50: #{$lilac-color-50};
     --background-color-100: #{$lilac-color-100};
     --background-color-200: #{$lilac-color-200};
     --background-color-300: #{$lilac-color-300};
