@@ -68,8 +68,6 @@ import HeaderMain from '@/components/HeaderMain.vue'
             </nav>
         </div>
     </section>
-
-    <RouterView />
 </template>
 
 <style lang="scss">
@@ -86,7 +84,6 @@ html {
 *::after {
   box-sizing: border-box;
   margin: 0;
-  position: relative;
   font-weight: normal;
 }
 
@@ -102,6 +99,11 @@ body {
 
 ul {
     list-style: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 .screen-reader-text {

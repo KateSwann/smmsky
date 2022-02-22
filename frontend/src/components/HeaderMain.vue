@@ -9,8 +9,64 @@ export default {
     },
 
     data() {
+        const testServicesMenuList = [
+            {
+                'name': 'Instagram',
+                'servicesList': [
+                    {
+                        'name': 'Подписчики',
+                        'price': 'от 0.02 ₽/шт'
+                    },
+                    {
+                        'name': 'Просмотры',
+                        'price': 'от 0.02 ₽/шт'
+                    },
+                    {
+                        'name': 'Участники',
+                        'price': 'от 0.02 ₽/шт'
+                    },
+                    {
+                        'name': 'Опросы',
+                        'price': 'от 0.02 ₽/шт'
+                    },
+                    {
+                        'name': 'Жалобы',
+                        'price': 'от 0.02 ₽/шт'
+                    },
+                ],
+            },
+            {
+                'name': 'Telegram',
+                'servicesList': [
+                    {
+                        'name': 'Подписчики',
+                        'price': 'от 0.05 ₽/шт'
+                    },
+                    {
+                        'name': 'Просмотры',
+                        'price': 'от 0.05 ₽/шт'
+                    },
+                    {
+                        'name': 'Участники',
+                        'price': 'от 0.05 ₽/шт'
+                    },
+                    {
+                        'name': 'Опросы',
+                        'price': 'от 0.05 ₽/шт'
+                    },
+                    {
+                        'name': 'Жалобы',
+                        'price': 'от 0.05 ₽/шт'
+                    },
+                ],
+            },
+        ];
+
         return {
-            isHeaderScrolled: false
+            isHeaderScrolled: false,
+            isDisplayedMobileNav: false,
+            displayedNavMobileListIndex: null,
+            testServicesMenuList
         }
     },
 
@@ -28,123 +84,199 @@ export default {
                 return;
             }
 
-            this.isHeaderScrolled = window.pageYOffset > 0
-            console.log(this.isHeaderScrolled);
-        }
+            this.isHeaderScrolled = window.pageYOffset > 0;
+        },
+
+        toggleMobileNav() {
+            this.isDisplayedMobileNav = !this.isDisplayedMobileNav;
+        },
     },
 }
 </script>
 
 <template>
-    <header class="header-main"
-            :class="[isHeaderScrolled ? 'header-main--scrolled' : '']">
-        <div class="header-main__content">
-            <RouterLink to="/"
-                        class="header-main__logo">
-                <div class="screen-reader-text">SMMSky</div>
-                <IconSiteLogo />
-            </RouterLink>
+    <div>
+        <header class="header-main"
+                :class="{ 'header-main--scrolled': isHeaderScrolled }">
+            <div class="header-main__content">
+                <RouterLink to="/"
+                            class="header-main__logo">
+                    <div class="screen-reader-text">SMMSky</div>
+                    <IconSiteLogo />
+                </RouterLink>
 
-            <nav class="main-nav">
-                <ul class="main-nav__list">
-                    <li class="main-nav__list-item
-                               main-nav__list-item--has-dropdown">
-                        <RouterLink to="/"
-                                    class="main-nav__list-link">Услуги</RouterLink>
+                <nav class="main-nav">
+                    <ul class="main-nav__list">
+                        <li class="main-nav__list-item
+                                main-nav__list-item--has-dropdown">
+                            <RouterLink to="/"
+                                        class="main-nav__list-link">Услуги</RouterLink>
 
-                        <div class="main-nav__dropdown
-                                    main-nav-dropdown">
-                            <ul class="main-nav-dropdown__list">
-                                <li class="main-nav-dropdown__list-item">
-                                    <RouterLink to="/"
-                                                class="main-nav-dropdown__list-link">Instagram</RouterLink>
+                            <div class="main-nav__dropdown
+                                        main-nav-dropdown">
+                                <ul class="main-nav-dropdown__list">
+                                    <li class="main-nav-dropdown__list-item"
+                                        v-for="servicesMenuItem in testServicesMenuList"
+                                        :key="servicesMenuItem.id">
+                                        <RouterLink to="/"
+                                                    class="main-nav-dropdown__list-link">
+                                            {{ servicesMenuItem.name }}
+                                        </RouterLink>
 
-                                    <div class="main-nav-dropdown__dropdown-deep
-                                                main-nav-dropdown-deep">
-                                        <ul class="main-nav-dropdown-deep__list">
-                                            <li class="main-nav-dropdown-deep__list-item">
-                                                Подписчики
-                                                <span class="main-nav-dropdown-deep__list-item-number">от 0.02 ₽/шт</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
+                                        <div class="main-nav-dropdown__dropdown-deep
+                                                    main-nav-dropdown-deep">
+                                            <ul class="main-nav-dropdown-deep__list">
+                                                <li class="main-nav-dropdown-deep__list-item"
+                                                    v-for="servicesMenuItemDeep in servicesMenuItem.servicesList"
+                                                    :key="servicesMenuItemDeep.id">
+                                                    {{ servicesMenuItemDeep.name }}
+                                                    <span class="main-nav-dropdown-deep__list-item-number">
+                                                        {{ servicesMenuItemDeep.price }}
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 
-                                <li class="main-nav-dropdown__list-item">
-                                    <RouterLink to="/"
-                                                class="main-nav-dropdown__list-link">Telegram</RouterLink>
+                        <li class="main-nav__list-item">
+                            <RouterLink to="/"
+                                        class="main-nav__list-link">Блог</RouterLink>
+                        </li>
 
-                                    <div class="main-nav-dropdown__dropdown-deep
-                                                main-nav-dropdown-deep">
-                                        <ul class="main-nav-dropdown-deep__list">
-                                            <li class="main-nav-dropdown-deep__list-item">
-                                                Подписчики
-                                                <span class="main-nav-dropdown-deep__list-item-number">от 0.02 ₽/шт</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                        <li class="main-nav__list-item">
+                            <RouterLink to="/"
+                                        class="main-nav__list-link">Как пользоваться</RouterLink>
+                        </li>
 
-                    <li class="main-nav__list-item">
-                        <RouterLink to="/"
-                                    class="main-nav__list-link">Блог</RouterLink>
-                    </li>
+                        <li class="main-nav__list-item">
+                            <RouterLink to="/"
+                                        class="main-nav__list-link">Отзывы</RouterLink>
+                        </li>
 
-                    <li class="main-nav__list-item">
-                        <RouterLink to="/"
-                                    class="main-nav__list-link">Как пользоваться</RouterLink>
-                    </li>
+                        <li class="main-nav__list-item">
+                            <RouterLink to="/"
+                                        class="main-nav__list-link">FAQ</RouterLink>
+                        </li>
+                    </ul>
+                </nav>
 
-                    <li class="main-nav__list-item">
-                        <RouterLink to="/"
-                                    class="main-nav__list-link">Отзывы</RouterLink>
-                    </li>
-
-                    <li class="main-nav__list-item">
-                        <RouterLink to="/"
-                                    class="main-nav__list-link">FAQ</RouterLink>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="header-main__buttons-group">
-                <div class="button button--secondary">Войти</div>
-                <div class="button">Зарегистрироваться</div>
+                <div class="header-main__buttons-group">
+                    <div class="button button--secondary">Войти</div>
+                    <div class="button">Зарегистрироваться</div>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
+
+        <header class="header-main-mobile">
+            <div class="header-main-mobile__content">
+                <div class="header-main-mobile-topbar">
+                    <div class="header-main-mobile-topbar__hamburger"
+                         :class="{ 'header-main-mobile-topbar__hamburger--open': isDisplayedMobileNav }"
+                         @click="toggleMobileNav">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <RouterLink to="/"
+                                class="header-main-mobile-topbar__logo">
+                        <div class="screen-reader-text">SMMSky</div>
+                        <IconSiteLogo />
+                    </RouterLink>
+                </div>
+
+                <div class="header-main-mobile-dropdown"
+                     v-show="isDisplayedMobileNav">
+                    <nav class="main-nav-mobile">
+                        <ul class="main-nav-mobile-list">
+                            <li class="main-nav-mobile-list__item">
+                                <RouterLink to="/"
+                                            class="main-nav-mobile-list__item-link">Блог</RouterLink>
+                            </li>
+
+                            <li class="main-nav-mobile-list__item">
+                                <RouterLink to="/"
+                                            class="main-nav-mobile-list__item-link">Как пользоваться</RouterLink>
+                            </li>
+
+                            <li class="main-nav-mobile-list__item">
+                                <RouterLink to="/"
+                                            class="main-nav-mobile-list__item-link">Отзывы</RouterLink>
+                            </li>
+
+                            <li class="main-nav-mobile-list__item">
+                                <RouterLink to="/"
+                                            class="main-nav-mobile-list__item-link">FAQ</RouterLink>
+                            </li>
+                        </ul>
+
+                        <ul class="main-nav-mobile-list-dropdown">
+                            <li class="main-nav-mobile-list-dropdown__list-item"
+                                v-for="(servicesMenuItem, index) in testServicesMenuList"
+                                :key="index">
+                                <div class="main-nav-mobile-list-dropdown__list-link"
+                                     @click="displayedNavMobileListIndex = index">
+                                    {{ servicesMenuItem.name }} {{index}}
+                                </div>
+
+                                <div class="main-nav-mobile-list-dropdown__dropdown-deep
+                                            main-nav-mobile-list-dropdown-deep"
+                                     v-if="displayedNavMobileListIndex === index">
+                                    <ul class="main-nav-mobile-list-dropdown-deep__list">
+                                        <li class="main-nav-mobile-list-dropdown-deep__list-item"
+                                            v-for="servicesMenuItemDeep in servicesMenuItem.servicesList"
+                                            :key="servicesMenuItemDeep.id">
+                                            {{ servicesMenuItemDeep.name }}
+                                            <span class="main-nav-mobile-list-dropdown-deep__list-item-number">
+                                                {{ servicesMenuItemDeep.price }}
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <div class="main-nav-mobile-list-dropdown-deep__return-link"
+                                         @click="displayedNavMobileListIndex = null">Вернуться назад</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="header-main-mobile-dropdown__buttons-group">
+                        <div class="button button--secondary">Войти</div>
+                        <div class="button">Зарегистрироваться</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
 </template>
 
 <style lang="scss">
-    .header-main {
-        width: 100%;
-        display: flex;
-        position: absolute;
-        z-index: 100;
-        transition: all .2s linear;
-
-        &--scrolled {
-            background-color: var(--background-color-50);
-            position: fixed;
-            box-shadow: 0px 10px 20px 0 rgb(0 0 0 / 10%);
+    @media (max-width: 1279px) {
+        .header-main {
+            display: none;
         }
+    }
 
-        &__logo {
-            display: flex;
-        }
-
-        @media (max-width: 767px) {}
-
-        @media (min-width: 768px) and (max-width: 1279px) {}
-
-        @media (min-width: 1280px) {
+    @media (min-width: 1280px) {
+        .header-main {
+            width: 100%;
             height: 104px;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: absolute;
+            z-index: 100;
+            transition: all .2s linear;
+
+            &--scrolled {
+                background-color: var(--background-color-50);
+                position: fixed;
+                box-shadow: 0px 10px 20px 0 rgb(0 0 0 / 10%);
+            }
 
             &__content {
                 max-width: 1920px;
@@ -157,6 +289,7 @@ export default {
 
             &__logo {
                 margin-right: auto;
+                display: flex;
             }
 
             &__buttons-group {
@@ -170,24 +303,8 @@ export default {
                 }
             }
         }
-    }
 
-    .main-nav {
-        &__list {}
-
-        &__list-item {
-            &--has-dropdown {}
-        }
-
-        &__list-link {}
-
-        &__dropdown {}
-
-        @media (max-width: 767px) {}
-
-        @media (min-width: 768px) and (max-width: 1279px) {}
-
-        @media (min-width: 1280px) {
+        .main-nav {
             margin: 1px 145px 0 0;
             letter-spacing: .3px;
 
@@ -231,7 +348,6 @@ export default {
                 font-size: 16px;
                 line-height: 1;
                 color: var(--text-color-regular);
-                text-decoration: none;
             }
 
             &__dropdown {
@@ -241,22 +357,8 @@ export default {
                 top: 100%;
             }
         }
-    }
 
-    .main-nav-dropdown {
-        &__list {}
-
-        &__list-item {}
-
-        &__list-link {}
-
-        &__dropdown-deep {}
-
-        @media (max-width: 767px) {}
-
-        @media (min-width: 768px) and (max-width: 1279px) {}
-
-        @media (min-width: 1280px) {
+        .main-nav-dropdown {
             $block-padding: 16px;
 
             width: 187px;
@@ -298,7 +400,6 @@ export default {
                 font-size: 16px;
                 line-height: 24px;
                 color: inherit;
-                text-decoration: none;
 
                 &::after {
                     content: "";
@@ -318,20 +419,8 @@ export default {
                 top: 0;
             }
         }
-    }
 
-    .main-nav-dropdown-deep {
-        &__list {}
-
-        &__list-item {}
-
-        &__list-item-number {}
-
-        @media (max-width: 767px) {}
-
-        @media (min-width: 768px) and (max-width: 1279px) {}
-
-        @media (min-width: 1280px) {
+        .main-nav-dropdown-deep {
             padding-left: 8px;
 
             &__list {
@@ -365,6 +454,194 @@ export default {
             &__list-item-number {
                 font-weight: 500;
             }
+        }
+    }
+
+    @media (max-width: 1279px) {
+        $topbar-height: 48px;
+
+        .header-main-mobile {
+            width: 100%;
+            margin-bottom: 16px;
+            letter-spacing: .3px;
+            position: fixed;
+            z-index: 100;
+            background-color: var(--background-color-100);
+
+            &__content {
+                max-width: 768px;
+                margin: 0 auto;
+            }
+        }
+
+        .header-main-mobile-topbar {
+            height: $topbar-height;
+            padding: 12px 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+
+            &__hamburger {
+                width: 20px;
+                height: 12px;
+                margin-right: auto;
+                position: relative;
+                transform: rotate(0deg);
+                transition: .2s ease-in-out;
+                cursor: pointer;
+
+                span {
+                    position: absolute;
+                    height: 2px;
+                    width: 100%;
+                    background-color: var(--text-color-heavy);
+                    border-radius: 2px;
+                    opacity: 1;
+                    left: 0;
+                    transform: rotate(0deg);
+                    transition: .1s ease-in-out;
+
+                    &:nth-child(1) {
+                        top: 0px;
+                    }
+
+                    &:nth-child(2),
+                    &:nth-child(3) {
+                        top: 5px;
+                    }
+
+                    &:nth-child(4) {
+                        top: 10px;
+                    }
+                }
+
+                &--open {
+                    span {
+                        &:nth-child(1) {
+                            top: 5px;
+                            width: 0%;
+                            left: 50%;
+                        }
+
+                        &:nth-child(2) {
+                            transform: rotate(45deg);
+                        }
+
+                        &:nth-child(3) {
+                            transform: rotate(-45deg);
+                        }
+
+                        &:nth-child(4) {
+                            top: 5px;
+                            width: 0%;
+                            left: 50%;
+                        }
+                    }
+                }
+            }
+
+            &__logo {
+                display: flex;
+            }
+        }
+
+        .header-main-mobile-dropdown {
+            height: calc(100vh - $topbar-height);
+            padding: 20px 10px;
+            display: flex;
+            flex-flow: column nowrap;
+
+            &__buttons-group {
+                padding-top: 16px;
+                display: flex;
+                flex-direction: column;
+
+                & > * {
+                    &:not(:last-child) {
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+
+        .main-nav-mobile {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .main-nav-mobile-list {
+            flex: 1;
+            margin-right: 11px;
+
+            &__item {
+                &:not(:last-child) {
+                    margin-bottom: 16px;
+                }
+            }
+
+            &__item-link {
+                color: #000;
+            }
+        }
+
+        .main-nav-mobile-list-dropdown {
+            flex: 1;
+            margin-left: 11px;
+
+            &__list-item {
+                &:not(:last-child) {
+                    margin-bottom: 8px;
+                }
+
+                &:not(:first-child) {
+                    margin-top: 8px;
+                }
+            }
+
+            &__list-link {
+                font-size: 16px;
+                line-height: 24px;
+                color: var(--text-color-heavy);
+            }
+        }
+
+        .main-nav-mobile-list-dropdown-deep {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: var(--background-color-100);
+
+            &__list-item {
+                display: flex;
+                justify-content: space-between;
+                color: var(--text-color-heavy);
+                line-height: 24px;
+
+                &:not(:last-child) {
+                    margin-bottom: 16px;
+                }
+            }
+
+            &__list-item-number {
+                font-weight: 500;
+            }
+
+            &__return-link {
+                margin-top: 24px;
+                color: var(--text-color-regular);
+                font-weight: 600;
+            }
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .header-main-mobile {
+            display: none;
         }
     }
 </style>
