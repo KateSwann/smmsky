@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from '@/components/HelloWorld.vue'
 import HeaderMain from '@/components/HeaderMain.vue'
+import Footer from '@/components/Footer.vue'
 </script>
 
 <template>
@@ -68,6 +69,8 @@ import HeaderMain from '@/components/HeaderMain.vue'
             </nav>
         </div>
     </section>
+
+    <Footer />
 </template>
 
 <style lang="scss">
